@@ -10,6 +10,7 @@
 - 通过fork()将程序一分为二，在子进程则pid返回0，在父进程则返回子进程的pid。
 - 采用传统的 fork/exec 模式，让子进程debugee接管被调试程序a.out。
 - 父进程则执行debugger操作，监控用户输入命令，开启调试流程。
+
 ```
 int main(int argc, char* argv[]) {
   if (argc < 2) {
@@ -32,8 +33,10 @@ int main(int argc, char* argv[]) {
   }
 }
 ```
+
 ## 3. debugee 接管被调试程序 a.out
 这里需要用到一个关键的系统调用 ptrace，ptrace提供了一种使父进程得以监视和控制其它进程的方式，它还能够改变子进程中的寄存器和内核映像，因而可以实现断点调试和系统调用的跟踪。使用ptrace，你可以在用户层拦截和修改系统调用(syscall)。像 gdb / lldb等调试器底层实现都是通过 ptrace，其函数原型为：
+
 ```
 long ptrace(enum __ptrace_request request, pid_t pid, void *addr, void *data);
 ```
@@ -50,10 +53,10 @@ void execute_debugee(const std::string &prog_name) {
 }
 ```
 
-
 ## 4. 命令解析辅助函数
 is_prefix 函数实现了命令匹配功能，即通过输入前几个字母来匹配完整命令名，如 is_prefix(command, "continue")，可以通过输入命令 continue、con、c 来匹配 continue 命令。
 split 函数以空格字符作为分隔符来获取命令行输入内容。
+
 ```
 // split and is_prefix are a couple of small helper functions
 std::vector<std::string> split(const std::string &s, char delimiter) {
@@ -74,6 +77,7 @@ bool is_prefix(const std::string &s, const std::string &of) {
   return std::equal(s.begin(), s.end(), of.begin());
 }
 ```
+
 ## 5. debugger类的成员函数
 debugger类有3个成员函数：
 - debugger::handle_command
@@ -81,6 +85,7 @@ debugger类有3个成员函数：
 - debugger::continue_execution
 
 1. debugger::handle_command 用来处理命令输入
+
 ```
 void debugger::handle_command(const std::string &line) {
   auto args = split(line, ' ');
@@ -95,6 +100,7 @@ void debugger::handle_command(const std::string &line) {
 ```
 
 2. debugger::run 程序运行，并记录历史命令。在 run 函数中，我们需要等待，直到子进程完成启动，然后一直从 linenoise 获取输入直到收到 EOF（CTRL+D）。当被跟踪的进程启动时，会发送一个 SIGTRAP 信号给它，这是一个跟踪或者断点中断。我们可以使用 waitpid 函数等待这个信号发送。
+
 ```
 void debugger::run() {
   int wait_status;
@@ -112,6 +118,7 @@ void debugger::run() {
 ```
 
 3. debugger::continue_execution 继续运行调试程序，通过 ptrace 中 PTRACE_CONT 枚举值参数实现。 continue_execution 函数会用 ptrace 告诉进程继续执行，然后用 waitpid 等待直到收到信号。
+
 ```
 void debugger::continue_execution() {
   ptrace(PTRACE_CONT, m_pid, nullptr, nullptr);
@@ -122,6 +129,7 @@ void debugger::continue_execution() {
 ```
 
 ## 6. debugger类的头文件debugger.h
+
 ```
 #ifndef DEBUGGER_H
 #define DEBUGGER_H
@@ -245,9 +253,11 @@ waitpid 会暂时停止目前进程的执行, 直到有信号来到或子进程�
 
 以上两种情况下，都可以使用 Linux 中的 waitpid()函数做到。
 waitpid 函数的定义：
+
 ```
 #include <sys/types.h> 
 #include <sys/wait.h>
 pid_t waitpid(pid_t pid,int *status,int options);
 ```
+
 如果在调用waitpid()函数时，当指定等待的子进程已经停止运行或结束了，则waitpid()会立即返回；但是如果子进程还没有停止运行或结束，则调用waitpid()函数的父进程则会被阻塞，暂停运行。
