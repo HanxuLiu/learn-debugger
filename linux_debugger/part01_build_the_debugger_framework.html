@@ -311,33 +311,32 @@
 <li>&#x5224;&#x65AD;main&#x51FD;&#x6570;&#x4F20;&#x53C2;&#xFF0C;&#x786E;&#x4FDD;&#x4ECE;&#x547D;&#x4EE4;&#x884C;&#x542F;&#x52A8;&#x8C03;&#x8BD5;&#x5668;&#x65F6;&#xFF0C;&#x540C;&#x65F6;&#x6307;&#x5B9A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;</li>
 <li>&#x901A;&#x8FC7;fork()&#x5C06;&#x7A0B;&#x5E8F;&#x4E00;&#x5206;&#x4E3A;&#x4E8C;&#xFF0C;&#x5728;&#x5B50;&#x8FDB;&#x7A0B;&#x5219;pid&#x8FD4;&#x56DE;0&#xFF0C;&#x5728;&#x7236;&#x8FDB;&#x7A0B;&#x5219;&#x8FD4;&#x56DE;&#x5B50;&#x8FDB;&#x7A0B;&#x7684;pid&#x3002;</li>
 <li>&#x91C7;&#x7528;&#x4F20;&#x7EDF;&#x7684; fork/exec &#x6A21;&#x5F0F;&#xFF0C;&#x8BA9;&#x5B50;&#x8FDB;&#x7A0B;debugee&#x63A5;&#x7BA1;&#x88AB;&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F;a.out&#x3002;</li>
-<li><p>&#x7236;&#x8FDB;&#x7A0B;&#x5219;&#x6267;&#x884C;debugger&#x64CD;&#x4F5C;&#xFF0C;&#x76D1;&#x63A7;&#x7528;&#x6237;&#x8F93;&#x5165;&#x547D;&#x4EE4;&#xFF0C;&#x5F00;&#x542F;&#x8C03;&#x8BD5;&#x6D41;&#x7A0B;&#x3002;</p>
+<li>&#x7236;&#x8FDB;&#x7A0B;&#x5219;&#x6267;&#x884C;debugger&#x64CD;&#x4F5C;&#xFF0C;&#x76D1;&#x63A7;&#x7528;&#x6237;&#x8F93;&#x5165;&#x547D;&#x4EE4;&#xFF0C;&#x5F00;&#x542F;&#x8C03;&#x8BD5;&#x6D41;&#x7A0B;&#x3002;</li>
+</ul>
 <pre><code>int main(int argc, char* argv[]) {
-if (argc &lt; 2) {
-  std::cerr &lt;&lt; &quot;Executable is not specified\n&quot;;
-  return -1;
-}
+  if (argc &lt; 2) {
+    std::cerr &lt;&lt; &quot;Executable is not specified\n&quot;;
+    return -1;
+  }
 
-auto prog = argv[1];
-auto pid = fork();
+  auto prog = argv[1];
+  auto pid = fork();
 
-if (pid == 0) {
-  // child process, debuggee
-  // launch the debugee program with classic fork/exec pattern
-  execute_debugee(prog);
-} else if (pid &gt;= 1) {
-  // parent process, debugger
-  std::cout &lt;&lt; &quot;Started debugging process &quot; &lt;&lt; pid &lt;&lt; &apos;\n&apos;;
-  debugger dbg{prog, pid}; // create class debugger to monit user input loop
-  dbg.run();
-}
+  if (pid == 0) {
+    // child process, debuggee
+    // launch the debugee program with classic fork/exec pattern
+    execute_debugee(prog);
+  } else if (pid &gt;= 1) {
+    // parent process, debugger
+    std::cout &lt;&lt; &quot;Started debugging process &quot; &lt;&lt; pid &lt;&lt; &apos;\n&apos;;
+    debugger dbg{prog, pid}; // create class debugger to monit user input loop
+    dbg.run();
+  }
 }
 </code></pre><h2 id="3-debugee-&#x63A5;&#x7BA1;&#x88AB;&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F;-aout">3. debugee &#x63A5;&#x7BA1;&#x88AB;&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F; a.out</h2>
 <p>&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x7528;&#x5230;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528; ptrace&#xFF0C;ptrace&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x4F7F;&#x7236;&#x8FDB;&#x7A0B;&#x5F97;&#x4EE5;&#x76D1;&#x89C6;&#x548C;&#x63A7;&#x5236;&#x5176;&#x5B83;&#x8FDB;&#x7A0B;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5B83;&#x8FD8;&#x80FD;&#x591F;&#x6539;&#x53D8;&#x5B50;&#x8FDB;&#x7A0B;&#x4E2D;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x548C;&#x5185;&#x6838;&#x6620;&#x50CF;&#xFF0C;&#x56E0;&#x800C;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x65AD;&#x70B9;&#x8C03;&#x8BD5;&#x548C;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x8DDF;&#x8E2A;&#x3002;&#x4F7F;&#x7528;ptrace&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x7528;&#x6237;&#x5C42;&#x62E6;&#x622A;&#x548C;&#x4FEE;&#x6539;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;(syscall)&#x3002;&#x50CF; gdb / lldb&#x7B49;&#x8C03;&#x8BD5;&#x5668;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#x90FD;&#x662F;&#x901A;&#x8FC7; ptrace&#xFF0C;&#x5176;&#x51FD;&#x6570;&#x539F;&#x578B;&#x4E3A;&#xFF1A;</p>
 <pre><code>long ptrace(enum __ptrace_request request, pid_t pid, void *addr, void *data);
-</code></pre></li>
-</ul>
-<p>&#x5B50;&#x8FDB;&#x7A0B;&#x5141;&#x8BB8;&#x88AB;&#x7236;&#x8FDB;&#x7A0B;&#x8DDF;&#x8E2A; &#xFF0C;&#x8C03;&#x7528;execl&#x6307;&#x5B9A;&#x8FD0;&#x884C;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#xFF1A;</p>
+</code></pre><p>&#x5B50;&#x8FDB;&#x7A0B;&#x5141;&#x8BB8;&#x88AB;&#x7236;&#x8FDB;&#x7A0B;&#x8DDF;&#x8E2A; &#xFF0C;&#x8C03;&#x7528;execl&#x6307;&#x5B9A;&#x8FD0;&#x884C;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#xFF1A;</p>
 <pre><code>void execute_debugee(const std::string &amp;prog_name) {
   if (ptrace(PTRACE_TRACEME, 0, 0, 0) &lt; 0) {
     std::cerr &lt;&lt; &quot;Error in ptrace\n&quot;;
@@ -374,42 +373,44 @@ bool is_prefix(const std::string &amp;s, const std::string &amp;of) {
 <li><p>debugger::continue_execution</p>
 </li>
 <li><p>debugger::handle_command &#x7528;&#x6765;&#x5904;&#x7406;&#x547D;&#x4EE4;&#x8F93;&#x5165;</p>
-<pre><code>void debugger::handle_command(const std::string &amp;line) {
-auto args = split(line, &apos; &apos;);
-auto command = args[0];
-
-if (is_prefix(command, &quot;continue&quot;)) {
- continue_execution();
-} else {
- std::cerr &lt;&lt; &quot;Unknown command\n&quot;;
-}
-}
-</code></pre></li>
-<li><p>debugger::run &#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#xFF0C;&#x5E76;&#x8BB0;&#x5F55;&#x5386;&#x53F2;&#x547D;&#x4EE4;&#x3002;&#x5728; run &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7B49;&#x5F85;&#xFF0C;&#x76F4;&#x5230;&#x5B50;&#x8FDB;&#x7A0B;&#x5B8C;&#x6210;&#x542F;&#x52A8;&#xFF0C;&#x7136;&#x540E;&#x4E00;&#x76F4;&#x4ECE; linenoise &#x83B7;&#x53D6;&#x8F93;&#x5165;&#x76F4;&#x5230;&#x6536;&#x5230; EOF&#xFF08;CTRL+D&#xFF09;&#x3002;&#x5F53;&#x88AB;&#x8DDF;&#x8E2A;&#x7684;&#x8FDB;&#x7A0B;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x4F1A;&#x53D1;&#x9001;&#x4E00;&#x4E2A; SIGTRAP &#x4FE1;&#x53F7;&#x7ED9;&#x5B83;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x8DDF;&#x8E2A;&#x6216;&#x8005;&#x65AD;&#x70B9;&#x4E2D;&#x65AD;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; waitpid &#x51FD;&#x6570;&#x7B49;&#x5F85;&#x8FD9;&#x4E2A;&#x4FE1;&#x53F7;&#x53D1;&#x9001;&#x3002;</p>
-<pre><code>void debugger::run() {
-int wait_status;
-auto options = 0;
-waitpid(m_pid, &amp;wait_status, options);
-char* line = nullptr;
-
-// get input until receive ctrl+d
-while ((line = linenoise(&quot;(xdb) &quot;)) != nullptr) {
- handle_command(line);
- linenoiseHistoryAdd(line);
- // linenoiseFree(line);
-}
-}
-</code></pre></li>
-<li><p>debugger::continue_execution &#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F;&#xFF0C;&#x901A;&#x8FC7; ptrace &#x4E2D; PTRACE_CONT &#x679A;&#x4E3E;&#x503C;&#x53C2;&#x6570;&#x5B9E;&#x73B0;&#x3002; continue_execution &#x51FD;&#x6570;&#x4F1A;&#x7528; ptrace &#x544A;&#x8BC9;&#x8FDB;&#x7A0B;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF0C;&#x7136;&#x540E;&#x7528; waitpid &#x7B49;&#x5F85;&#x76F4;&#x5230;&#x6536;&#x5230;&#x4FE1;&#x53F7;&#x3002;</p>
-<pre><code>void debugger::continue_execution() {
-ptrace(PTRACE_CONT, m_pid, nullptr, nullptr);
-int wait_status;
-auto options = 0;
-waitpid(m_pid, &amp;wait_status, options);
-}
-</code></pre></li>
+</li>
 </ul>
-<h2 id="6-debugger&#x7C7B;&#x7684;&#x5934;&#x6587;&#x4EF6;debuggerh">6. debugger&#x7C7B;&#x7684;&#x5934;&#x6587;&#x4EF6;debugger.h</h2>
+<pre><code>void debugger::handle_command(const std::string &amp;line) {
+  auto args = split(line, &apos; &apos;);
+  auto command = args[0];
+
+  if (is_prefix(command, &quot;continue&quot;)) {
+    continue_execution();
+  } else {
+    std::cerr &lt;&lt; &quot;Unknown command\n&quot;;
+  }
+}
+</code></pre><ol>
+<li>debugger::run &#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#xFF0C;&#x5E76;&#x8BB0;&#x5F55;&#x5386;&#x53F2;&#x547D;&#x4EE4;&#x3002;&#x5728; run &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7B49;&#x5F85;&#xFF0C;&#x76F4;&#x5230;&#x5B50;&#x8FDB;&#x7A0B;&#x5B8C;&#x6210;&#x542F;&#x52A8;&#xFF0C;&#x7136;&#x540E;&#x4E00;&#x76F4;&#x4ECE; linenoise &#x83B7;&#x53D6;&#x8F93;&#x5165;&#x76F4;&#x5230;&#x6536;&#x5230; EOF&#xFF08;CTRL+D&#xFF09;&#x3002;&#x5F53;&#x88AB;&#x8DDF;&#x8E2A;&#x7684;&#x8FDB;&#x7A0B;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x4F1A;&#x53D1;&#x9001;&#x4E00;&#x4E2A; SIGTRAP &#x4FE1;&#x53F7;&#x7ED9;&#x5B83;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x8DDF;&#x8E2A;&#x6216;&#x8005;&#x65AD;&#x70B9;&#x4E2D;&#x65AD;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; waitpid &#x51FD;&#x6570;&#x7B49;&#x5F85;&#x8FD9;&#x4E2A;&#x4FE1;&#x53F7;&#x53D1;&#x9001;&#x3002;</li>
+</ol>
+<pre><code>void debugger::run() {
+  int wait_status;
+  auto options = 0;
+  waitpid(m_pid, &amp;wait_status, options);
+  char* line = nullptr;
+
+  // get input until receive ctrl+d
+  while ((line = linenoise(&quot;(xdb) &quot;)) != nullptr) {
+    handle_command(line);
+    linenoiseHistoryAdd(line);
+    // linenoiseFree(line);
+  }
+}
+</code></pre><ol>
+<li>debugger::continue_execution &#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F;&#xFF0C;&#x901A;&#x8FC7; ptrace &#x4E2D; PTRACE_CONT &#x679A;&#x4E3E;&#x503C;&#x53C2;&#x6570;&#x5B9E;&#x73B0;&#x3002; continue_execution &#x51FD;&#x6570;&#x4F1A;&#x7528; ptrace &#x544A;&#x8BC9;&#x8FDB;&#x7A0B;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF0C;&#x7136;&#x540E;&#x7528; waitpid &#x7B49;&#x5F85;&#x76F4;&#x5230;&#x6536;&#x5230;&#x4FE1;&#x53F7;&#x3002;</li>
+</ol>
+<pre><code>void debugger::continue_execution() {
+  ptrace(PTRACE_CONT, m_pid, nullptr, nullptr);
+  int wait_status;
+  auto options = 0;
+  waitpid(m_pid, &amp;wait_status, options);
+}
+</code></pre><h2 id="6-debugger&#x7C7B;&#x7684;&#x5934;&#x6587;&#x4EF6;debuggerh">6. debugger&#x7C7B;&#x7684;&#x5934;&#x6587;&#x4EF6;debugger.h</h2>
 <pre><code>#ifndef DEBUGGER_H
 #define DEBUGGER_H
 
@@ -589,7 +590,7 @@ pid_t waitpid(pid_t pid,int *status,int options);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"next":{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]},"previous":{"title":"手撸一个Linux调试器","level":"1.4","depth":1,"path":"linux_debugger/README.md","ref":"linux_debugger/README.md","articles":[{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"path":"linux_debugger/part01_build_the_debugger_framework.md","ref":"linux_debugger/part01_build_the_debugger_framework.md","articles":[]},{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linux_debugger/part01_build_the_debugger_framework.md","mtime":"2021-11-20T08:05:10.954Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-11-20T08:14:16.110Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"next":{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]},"previous":{"title":"手撸一个Linux调试器","level":"1.4","depth":1,"path":"linux_debugger/README.md","ref":"linux_debugger/README.md","articles":[{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"path":"linux_debugger/part01_build_the_debugger_framework.md","ref":"linux_debugger/part01_build_the_debugger_framework.md","articles":[]},{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linux_debugger/part01_build_the_debugger_framework.md","mtime":"2021-11-20T08:27:32.856Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-11-20T08:52:34.678Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
