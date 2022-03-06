@@ -17,11 +17,39 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
@@ -105,7 +133,7 @@
                 <a href="../gdb/">
             
                     
-                    gdb教程
+                    《gdb教程》
             
                 </a>
             
@@ -114,27 +142,40 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" >
+        <li class="chapter " data-level="1.2.1" data-path="../gdb/001_intall_gdb.html">
             
-                <span>
+                <a href="../gdb/001_intall_gdb.html">
             
                     
-                    title 1
+                    安装gdb
             
-                </span>
+                </a>
             
 
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" >
+        <li class="chapter " data-level="1.2.2" data-path="../gdb/002_run_gdb.html">
             
-                <span>
+                <a href="../gdb/002_run_gdb.html">
             
                     
-                    title 2
+                    启动gdb
             
-                </span>
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../gdb/gdbinit.html">
+            
+                <a href="../gdb/gdbinit.html">
+            
+                    
+                    配置.gdbinit
+            
+                </a>
             
 
             
@@ -150,7 +191,7 @@
                 <a href="../lldb/">
             
                     
-                     lldb教程
+                    《lldb教程》
             
                 </a>
             
@@ -195,7 +236,7 @@
                 <a href="./">
             
                     
-                    手撸一个Linux调试器
+                    《手撸一个Linux调试器》
             
                 </a>
             
@@ -551,7 +592,10 @@ waitpid &#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#xFF1A;</p>
 #include &lt;sys/wait.h&gt;
 pid_t waitpid(pid_t pid,int *status,int options);
 </code></pre><p>&#x5982;&#x679C;&#x5728;&#x8C03;&#x7528;waitpid()&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x5F53;&#x6307;&#x5B9A;&#x7B49;&#x5F85;&#x7684;&#x5B50;&#x8FDB;&#x7A0B;&#x5DF2;&#x7ECF;&#x505C;&#x6B62;&#x8FD0;&#x884C;&#x6216;&#x7ED3;&#x675F;&#x4E86;&#xFF0C;&#x5219;waitpid()&#x4F1A;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF1B;&#x4F46;&#x662F;&#x5982;&#x679C;&#x5B50;&#x8FDB;&#x7A0B;&#x8FD8;&#x6CA1;&#x6709;&#x505C;&#x6B62;&#x8FD0;&#x884C;&#x6216;&#x7ED3;&#x675F;&#xFF0C;&#x5219;&#x8C03;&#x7528;waitpid()&#x51FD;&#x6570;&#x7684;&#x7236;&#x8FDB;&#x7A0B;&#x5219;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x6682;&#x505C;&#x8FD0;&#x884C;&#x3002;</p>
-
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2021-11-20 16:27:32
+</span></footer>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
                                 </section>
                             
@@ -578,7 +622,7 @@ pid_t waitpid(pid_t pid,int *status,int options);
 
             
                 
-                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 手撸一个Linux调试器">
+                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 《手撸一个Linux调试器》">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -590,7 +634,7 @@ pid_t waitpid(pid_t pid,int *status,int options);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"next":{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]},"previous":{"title":"手撸一个Linux调试器","level":"1.4","depth":1,"path":"linux_debugger/README.md","ref":"linux_debugger/README.md","articles":[{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"path":"linux_debugger/part01_build_the_debugger_framework.md","ref":"linux_debugger/part01_build_the_debugger_framework.md","articles":[]},{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linux_debugger/part01_build_the_debugger_framework.md","mtime":"2021-11-20T08:27:32.856Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-11-20T08:52:34.678Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"next":{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]},"previous":{"title":"《手撸一个Linux调试器》","level":"1.4","depth":1,"path":"linux_debugger/README.md","ref":"linux_debugger/README.md","articles":[{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"path":"linux_debugger/part01_build_the_debugger_framework.md","ref":"linux_debugger/part01_build_the_debugger_framework.md","articles":[]},{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","hide-element","chapter-fold","expandable-chapters","code","splitter","-lunr","-search","search-pro","insert-logo","custom-favicon","tbfed-pagefooter","-sharing","popup","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"livereload":{},"splitter":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./book.ico","back-to-top-button":{},"custom-favicon":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203061424792.png"},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linux_debugger/part01_build_the_debugger_framework.md","mtime":"2021-11-20T08:27:32.856Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-06T09:09:12.146Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -600,23 +644,43 @@ pid_t waitpid(pid_t pid,int *status,int options);
     <script src="../gitbook/theme.js"></script>
     
         
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        <script src="../gitbook/gitbook-plugin-hide-element/plugin.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         
