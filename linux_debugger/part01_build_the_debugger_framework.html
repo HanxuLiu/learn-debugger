@@ -49,6 +49,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-treeview/style.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -133,7 +137,7 @@
                 <a href="../gdb/">
             
                     
-                    《gdb教程》
+                    《GDB 教程》
             
                 </a>
             
@@ -168,7 +172,33 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="../gdb/gdbinit.html">
+        <li class="chapter " data-level="1.2.3" data-path="../gdb/003_show_gdb_info.html">
+            
+                <a href="../gdb/003_show_gdb_info.html">
+            
+                    
+                    显示gdb信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../gdb/004_show_exec_info.html">
+            
+                <a href="../gdb/004_show_exec_info.html">
+            
+                    
+                    显示可执行程序信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../gdb/gdbinit.html">
             
                 <a href="../gdb/gdbinit.html">
             
@@ -191,7 +221,7 @@
                 <a href="../lldb/">
             
                     
-                    《lldb教程》
+                    《LLDB 教程》
             
                 </a>
             
@@ -340,7 +370,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="1-&#x5B89;&#x88C5;&#x4F9D;&#x8D56;">1. &#x5B89;&#x88C5;&#x4F9D;&#x8D56;</h2>
+                                <div class="treeview__container"><ul>
+<li><div><a href="#2-&#x521B;&#x5EFA;-debugger-&#x548C;-debugee">2. &#x521B;&#x5EFA; debugger &#x548C; debugee</a><i></i></div></li>
+<li><div><a href="#3-debugee-&#x63A5;&#x7BA1;&#x88AB;&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F;-aout">3. debugee &#x63A5;&#x7BA1;&#x88AB;&#x8C03;&#x8BD5;&#x7A0B;&#x5E8F; a.out</a><i></i></div></li>
+<li><div><a href="#4-&#x547D;&#x4EE4;&#x89E3;&#x6790;&#x8F85;&#x52A9;&#x51FD;&#x6570;">4. &#x547D;&#x4EE4;&#x89E3;&#x6790;&#x8F85;&#x52A9;&#x51FD;&#x6570;</a><i></i></div></li>
+<li><div><a href="#5-debugger&#x7C7B;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;">5. debugger&#x7C7B;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;</a><i></i></div></li>
+<li><div><a href="#6-debugger&#x7C7B;&#x7684;&#x5934;&#x6587;&#x4EF6;debuggerh">6. debugger&#x7C7B;&#x7684;&#x5934;&#x6587;&#x4EF6;debugger.h</a><i></i></div></li>
+<li><div><a href="#&#x6269;&#x5C55;&#x4E00;&#xFF1A;ptrace-&#x4ECB;&#x7ECD;">&#x6269;&#x5C55;&#x4E00;&#xFF1A;ptrace &#x4ECB;&#x7ECD;</a><i></i></div></li>
+<li><div><a href="#&#x6269;&#x5C55;&#x4E8C;&#xFF1A;waitpid-&#x4ECB;&#x7ECD;">&#x6269;&#x5C55;&#x4E8C;&#xFF1A;waitpid &#x4ECB;&#x7ECD;</a><i></i></div></li>
+</ul>
+</div>
+
+<h2 id="1-&#x5B89;&#x88C5;&#x4F9D;&#x8D56;">1. &#x5B89;&#x88C5;&#x4F9D;&#x8D56;</h2>
 <p>&#x9996;&#x5148;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x4E24;&#x4E2A;&#x4F9D;&#x8D56;&#x5DE5;&#x5177;&#xFF1A;</p>
 <ul>
 <li><a href="https://github.com/antirez/linenoise" target="_blank">Linenoise</a> &#x7528;&#x4E8E;&#x5904;&#x7406;&#x547D;&#x4EE4;&#x884C;&#x8F93;&#x5165;</li>
@@ -634,7 +675,7 @@ pid_t waitpid(pid_t pid,int *status,int options);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"next":{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]},"previous":{"title":"《手撸一个Linux调试器》","level":"1.4","depth":1,"path":"linux_debugger/README.md","ref":"linux_debugger/README.md","articles":[{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"path":"linux_debugger/part01_build_the_debugger_framework.md","ref":"linux_debugger/part01_build_the_debugger_framework.md","articles":[]},{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","hide-element","chapter-fold","expandable-chapters","code","splitter","-lunr","-search","search-pro","insert-logo","custom-favicon","tbfed-pagefooter","-sharing","popup","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"livereload":{},"splitter":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./book.ico","back-to-top-button":{},"custom-favicon":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203061424792.png"},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linux_debugger/part01_build_the_debugger_framework.md","mtime":"2021-11-20T08:27:32.856Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-06T09:09:12.146Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"next":{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]},"previous":{"title":"《手撸一个Linux调试器》","level":"1.4","depth":1,"path":"linux_debugger/README.md","ref":"linux_debugger/README.md","articles":[{"title":"1. 搭建调试器框架","level":"1.4.1","depth":2,"path":"linux_debugger/part01_build_the_debugger_framework.md","ref":"linux_debugger/part01_build_the_debugger_framework.md","articles":[]},{"title":"title 2","level":"1.4.2","depth":2,"ref":"","articles":[{"title":"subtitle 2.1","level":"1.4.2.1","depth":3,"ref":"","articles":[]}]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","hide-element","chapter-fold","expandable-chapters","code","splitter","-lunr","-search","search-pro","insert-logo","custom-favicon","tbfed-pagefooter","-sharing","page-treeview","popup","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"page-treeview":{"collapsed":false,"copyright":"","minHeaderCount":"2","minHeaderDeep":"2"},"chapter-fold":{},"livereload":{},"splitter":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./book.ico","back-to-top-button":{},"custom-favicon":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203061424792.png"},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linux_debugger/part01_build_the_debugger_framework.md","mtime":"2021-11-20T08:27:32.856Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-21T15:26:55.853Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

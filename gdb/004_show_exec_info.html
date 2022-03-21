@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>《GDB 教程》 · GitBook</title>
+        <title>显示可执行程序信息 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -89,10 +89,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="001_intall_gdb.html" />
+    <link rel="next" href="gdbinit.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="003_show_gdb_info.html" />
     
 
     </head>
@@ -134,7 +134,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="./">
             
                 <a href="./">
             
@@ -187,7 +187,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.4" data-path="004_show_exec_info.html">
+        <li class="chapter active" data-level="1.2.4" data-path="004_show_exec_info.html">
             
                 <a href="004_show_exec_info.html">
             
@@ -357,7 +357,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >《GDB 教程》</a>
+        <a href=".." >显示可执行程序信息</a>
     </h1>
 </div>
 
@@ -372,10 +372,150 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="gdb-&#x6559;&#x7A0B;">GDB &#x6559;&#x7A0B;</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203212054489.jpeg" alt="gdb"></p>
-<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2022-03-21 20:54:48
+                                <div class="treeview__container"><ul>
+<li><div><a href="#&#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4FE1;&#x606F;">&#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4FE1;&#x606F;</a><i class="level__parent level__item level__parent--opened" state="opened" onclick="var curState = this.getAttribute(&apos;state&apos;);var nextState = curState === &apos;opened&apos; ? &apos;hidden&apos; : &apos;opened&apos;;this.setAttribute(&apos;state&apos;, nextState);this.className = this.className.split(curState).join(nextState);var list = this.parentNode.nextElementSibling;if (nextState === &apos;hidden&apos;) {    list.style.display = &apos;none&apos;;} else {    list.style.display = &apos;block&apos;;}"></i></div>
+<ul>
+<li><div><a href="#1-&#x663E;&#x793A;&#x6E90;&#x4EE3;&#x7801;">1. &#x663E;&#x793A;&#x6E90;&#x4EE3;&#x7801;</a><i></i></div></li>
+<li><div><a href="#2-&#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4E2D;&#x6240;&#x6709;&#x51FD;&#x6570;">2. &#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4E2D;&#x6240;&#x6709;&#x51FD;&#x6570;</a><i></i></div></li>
+</ul></li>
+</ul>
+</div>
+
+
+<h2 id="&#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4FE1;&#x606F;">&#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4FE1;&#x606F;</h2>
+<p><strong>&#x793A;&#x4F8B;&#x4EE3;&#x7801; bubble_sort.c</strong>&#xFF1A;</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+void BubbleSort(int *arr, int size) {
+  int i, j, tmp;
+  for (i = 0; i &lt; size - 1; i++) {
+    for (j = 0; j &lt; size - i - 1; j++) {
+      if (arr[j] &gt; arr[j + 1])
+      {
+        tmp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = tmp;
+      }
+    }
+  }
+}
+
+int main(int argc, char* argv[]) {
+  int a[5] = { 43, 56, 78, 23, 43 };
+  printf(&quot;\n&#x6392;&#x5E8F;&#x4E4B;&#x524D;&#x8F93;&#x51FA;&#xFF1A;\n&quot;);
+  for (int i = 0; i &lt; 5; i++)
+    printf(&quot;%5d&quot;, a[i]);
+  printf(&quot;\n&quot;);
+  BubbleSort(a, 5);
+  printf(&quot;\n&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x8F93;&#x51FA;&#xFF1A;\n&quot;);
+  for (int i = 0; i &lt; 5; i++)
+    printf(&quot;%5d&quot;, a[i]);
+  printf(&quot;\n\n&quot;);
+  return 0;
+}
+</code></pre><h3 id="1-&#x663E;&#x793A;&#x6E90;&#x4EE3;&#x7801;">1. &#x663E;&#x793A;&#x6E90;&#x4EE3;&#x7801;</h3>
+<p>&#x4F7F;&#x7528;<code>list</code>&#xFF08;&#x7B80;&#x5199;&#x4E3A;l&#xFF09;&#x547D;&#x4EE4;&#x6765;&#x663E;&#x793A;&#x6E90;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>(gdb) l
+3    void BubbleSort(int *arr, int size) {
+4      int i, j, tmp;
+5      for (i = 0; i &lt; size - 1; i++) {
+6        for (j = 0; j &lt; size - i - 1; j++) {
+7          if (arr[j] &gt; arr[j + 1])
+8          {
+9            tmp = arr[j];
+10            arr[j] = arr[j + 1];
+11            arr[j + 1] = tmp;
+12          }
+(gdb)
+</code></pre><p><code>list</code>&#x547D;&#x4EE4;&#x6253;&#x5370;&#x6307;&#x5B9A;&#x884C;&#x53F7;&#xFF1A;</p>
+<pre><code>(gdb) l 16
+11            arr[j + 1] = tmp;
+12          }
+13        }
+14      }
+15    }
+16    
+17    int main(int argc, char* argv[]) {
+18      int a[5] = { 43, 56, 78, 23, 43 };
+19      printf(&quot;\n&#x6392;&#x5E8F;&#x4E4B;&#x524D;&#x8F93;&#x51FA;&#xFF1A;\n&quot;);
+20      for (int i = 0; i &lt; 5; i++)
+(gdb)
+</code></pre><p><code>list</code>&#x547D;&#x4EE4;&#x6253;&#x5370;&#x6307;&#x5B9A;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code>(gdb) l main
+12          }
+13        }
+14      }
+15    }
+16    
+17    int main(int argc, char* argv[]) {
+18      int a[5] = { 43, 56, 78, 23, 43 };
+19      printf(&quot;\n&#x6392;&#x5E8F;&#x4E4B;&#x524D;&#x8F93;&#x51FA;&#xFF1A;\n&quot;);
+20      for (int i = 0; i &lt; 5; i++)
+21        printf(&quot;%5d&quot;, a[i]);
+(gdb)
+</code></pre><p><code>list</code>&#x547D;&#x4EE4;&#x6307;&#x5B9A;&#x5411;&#x524D;&#x6216;&#x5411;&#x540E;&#x6253;&#x5370;&#xFF1A;</p>
+<pre><code>(gdb) l +
+22      printf(&quot;\n&quot;);
+23      BubbleSort(a, 5);
+24      printf(&quot;\n&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x8F93;&#x51FA;&#xFF1A;\n&quot;);
+25      for (int i = 0; i &lt; 5; i++)
+26        printf(&quot;%5d&quot;, a[i]);
+27      printf(&quot;\n\n&quot;);
+28      return 0;
+29    }
+(gdb) l -
+12          }
+13        }
+14      }
+15    }
+16    
+17    int main(int argc, char* argv[]) {
+18      int a[5] = { 43, 56, 78, 23, 43 };
+19      printf(&quot;\n&#x6392;&#x5E8F;&#x4E4B;&#x524D;&#x8F93;&#x51FA;&#xFF1A;\n&quot;);
+20      for (int i = 0; i &lt; 5; i++)
+21        printf(&quot;%5d&quot;, a[i]);
+(gdb)
+</code></pre><p><code>list</code>&#x547D;&#x4EE4;&#x6253;&#x5370;&#x6307;&#x5B9A;&#x8303;&#x56F4;&#xFF1A;</p>
+<pre><code>(gdb) l 9,11
+9            tmp = arr[j];
+10            arr[j] = arr[j + 1];
+11            arr[j + 1] = tmp;
+(gdb)
+</code></pre><h3 id="2-&#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4E2D;&#x6240;&#x6709;&#x51FD;&#x6570;">2. &#x663E;&#x793A;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x4E2D;&#x6240;&#x6709;&#x51FD;&#x6570;</h3>
+<p>&#x4F7F;&#x7528;<code>info functions</code>&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x5217;&#x51FA;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x51FD;&#x6570;&#x540D;&#x79F0;&#xFF0C;gdb&#x4F1A;&#x5217;&#x51FA;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x51FD;&#x6570;&#x539F;&#x578B;&#x4EE5;&#x53CA;&#x7CFB;&#x7EDF;&#x5E93;&#x4E2D;&#x4E0D;&#x5E26;&#x8C03;&#x8BD5;&#x4FE1;&#x606F;&#x7684;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code>(gdb) info functions 
+All defined functions:
+
+File bubble_sort.c:
+3:    void BubbleSort(int *, int);
+17:    int main(int, char **);
+
+Non-debugging symbols:
+0x0000000000001000  _init
+0x0000000000001070  __cxa_finalize@plt
+0x0000000000001080  putchar@plt
+0x0000000000001090  puts@plt
+0x00000000000010a0  __stack_chk_fail@plt
+0x00000000000010b0  printf@plt
+0x00000000000010c0  _start
+0x00000000000010f0  deregister_tm_clones
+0x0000000000001120  register_tm_clones
+0x0000000000001160  __do_global_dtors_aux
+0x00000000000011a0  frame_dummy
+0x00000000000013a0  __libc_csu_init
+0x0000000000001410  __libc_csu_fini
+0x0000000000001418  _fini
+(gdb)
+</code></pre><p>&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;<code>info functions regex</code>&#x5217;&#x51FA;&#x7B26;&#x5408;&#x7B5B;&#x9009;&#x8981;&#x6C42;&#x7684;&#x51FD;&#x6570;&#x540D;&#x79F0;&#xFF1A;</p>
+<pre><code>(gdb) info functions put*
+All functions matching regular expression &quot;put*&quot;:
+
+Non-debugging symbols:
+0x0000000000001080  putchar@plt
+0x0000000000001090  puts@plt
+(gdb)
+</code></pre><footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-03-21 23:24:39
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -404,12 +544,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 介绍">
+                <a href="003_show_gdb_info.html" class="navigation navigation-prev " aria-label="Previous page: 显示gdb信息">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="001_intall_gdb.html" class="navigation navigation-next " aria-label="Next page: 安装gdb">
+                <a href="gdbinit.html" class="navigation navigation-next " aria-label="Next page: 配置.gdbinit">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -420,7 +560,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"《GDB 教程》","level":"1.2","depth":1,"next":{"title":"安装gdb","level":"1.2.1","depth":2,"path":"gdb/001_intall_gdb.md","ref":"gdb/001_intall_gdb.md","articles":[]},"previous":{"title":"介绍","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","hide-element","chapter-fold","expandable-chapters","code","splitter","-lunr","-search","search-pro","insert-logo","custom-favicon","tbfed-pagefooter","-sharing","page-treeview","popup","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"page-treeview":{"collapsed":false,"copyright":"","minHeaderCount":"2","minHeaderDeep":"2"},"chapter-fold":{},"livereload":{},"splitter":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./book.ico","back-to-top-button":{},"custom-favicon":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203061424792.png"},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"gdb/README.md","mtime":"2022-03-21T12:54:48.477Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-21T15:26:55.853Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"显示可执行程序信息","level":"1.2.4","depth":2,"next":{"title":"配置.gdbinit","level":"1.2.5","depth":2,"path":"gdb/gdbinit.md","ref":"gdb/gdbinit.md","articles":[]},"previous":{"title":"显示gdb信息","level":"1.2.3","depth":2,"path":"gdb/003_show_gdb_info.md","ref":"gdb/003_show_gdb_info.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","hide-element","chapter-fold","expandable-chapters","code","splitter","-lunr","-search","search-pro","insert-logo","custom-favicon","tbfed-pagefooter","-sharing","page-treeview","popup","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"page-treeview":{"collapsed":false,"copyright":"","minHeaderCount":"2","minHeaderDeep":"2"},"chapter-fold":{},"livereload":{},"splitter":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./book.ico","back-to-top-button":{},"custom-favicon":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203061424792.png"},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"gdb/004_show_exec_info.md","mtime":"2022-03-21T15:24:39.423Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-21T15:26:55.853Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

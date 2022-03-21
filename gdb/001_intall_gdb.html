@@ -49,6 +49,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-treeview/style.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -135,7 +139,7 @@
                 <a href="./">
             
                     
-                    《gdb教程》
+                    《GDB 教程》
             
                 </a>
             
@@ -170,7 +174,33 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="gdbinit.html">
+        <li class="chapter " data-level="1.2.3" data-path="003_show_gdb_info.html">
+            
+                <a href="003_show_gdb_info.html">
+            
+                    
+                    显示gdb信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="004_show_exec_info.html">
+            
+                <a href="004_show_exec_info.html">
+            
+                    
+                    显示可执行程序信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="gdbinit.html">
             
                 <a href="gdbinit.html">
             
@@ -193,7 +223,7 @@
                 <a href="../lldb/">
             
                     
-                    《lldb教程》
+                    《LLDB 教程》
             
                 </a>
             
@@ -342,7 +372,25 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x6E90;&#x7801;&#x5B89;&#x88C5;">&#x6E90;&#x7801;&#x5B89;&#x88C5;</h2>
+                                <div class="treeview__container"><ul>
+<li><div><a href="#&#x6E90;&#x7801;&#x5B89;&#x88C5;">&#x6E90;&#x7801;&#x5B89;&#x88C5;</a><i class="level__parent level__item level__parent--opened" state="opened" onclick="var curState = this.getAttribute(&apos;state&apos;);var nextState = curState === &apos;opened&apos; ? &apos;hidden&apos; : &apos;opened&apos;;this.setAttribute(&apos;state&apos;, nextState);this.className = this.className.split(curState).join(nextState);var list = this.parentNode.nextElementSibling;if (nextState === &apos;hidden&apos;) {    list.style.display = &apos;none&apos;;} else {    list.style.display = &apos;block&apos;;}"></i></div>
+<ul>
+<li><div><a href="#1-&#x4E0B;&#x8F7D;-gdb-&#x7248;&#x672C;">1. &#x4E0B;&#x8F7D; gdb &#x7248;&#x672C;</a><i></i></div></li>
+<li><div><a href="#2--&#x89E3;&#x538B;">2.  &#x89E3;&#x538B;</a><i></i></div></li>
+<li><div><a href="#3-&#x7F16;&#x8BD1;&#x5E76;&#x5B89;&#x88C5;">3. &#x7F16;&#x8BD1;&#x5E76;&#x5B89;&#x88C5;</a><i></i></div></li>
+<li><div><a href="#4-&#x6DFB;&#x52A0;-bin-&#x8DEF;&#x5F84;&#x5230;-path">4. &#x6DFB;&#x52A0; bin &#x8DEF;&#x5F84;&#x5230; PATH</a><i></i></div></li>
+<li><div><a href="#5-q-amp-a">5. Q &amp; A</a><i></i></div></li>
+</ul></li>
+<li><div><a href="#&#x4ED3;&#x5E93;&#x5B89;&#x88C5;">&#x4ED3;&#x5E93;&#x5B89;&#x88C5;</a><i class="level__parent level__item level__parent--opened" state="opened" onclick="var curState = this.getAttribute(&apos;state&apos;);var nextState = curState === &apos;opened&apos; ? &apos;hidden&apos; : &apos;opened&apos;;this.setAttribute(&apos;state&apos;, nextState);this.className = this.className.split(curState).join(nextState);var list = this.parentNode.nextElementSibling;if (nextState === &apos;hidden&apos;) {    list.style.display = &apos;none&apos;;} else {    list.style.display = &apos;block&apos;;}"></i></div>
+<ul>
+<li><div><a href="#1-apt-&#x6E90;&#x5B89;&#x88C5;">1. apt &#x6E90;&#x5B89;&#x88C5;</a><i></i></div></li>
+<li><div><a href="#2-yum-&#x6E90;&#x5B89;&#x88C5;">2. yum &#x6E90;&#x5B89;&#x88C5;</a><i></i></div></li>
+</ul></li>
+</ul>
+</div>
+
+
+<h2 id="&#x6E90;&#x7801;&#x5B89;&#x88C5;">&#x6E90;&#x7801;&#x5B89;&#x88C5;</h2>
 <h3 id="1-&#x4E0B;&#x8F7D;-gdb-&#x7248;&#x672C;">1. &#x4E0B;&#x8F7D; gdb &#x7248;&#x672C;</h3>
 <pre><code> wget http://ftp.gnu.org/gnu/gdb/gdb-11.2.tar.gz
 </code></pre><h3 id="2--&#x89E3;&#x538B;">2.  &#x89E3;&#x538B;</h3>
@@ -363,7 +411,7 @@ make install
 </code></pre><h3 id="2-yum-&#x6E90;&#x5B89;&#x88C5;">2. yum &#x6E90;&#x5B89;&#x88C5;</h3>
 <pre><code>sudo yum install gdb
 </code></pre><footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2022-03-05 17:59:59
+2022-03-21 17:21:06
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -392,7 +440,7 @@ make install
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 《gdb教程》">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 《GDB 教程》">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -408,7 +456,7 @@ make install
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"安装gdb","level":"1.2.1","depth":2,"next":{"title":"启动gdb","level":"1.2.2","depth":2,"path":"gdb/002_run_gdb.md","ref":"gdb/002_run_gdb.md","articles":[]},"previous":{"title":"《gdb教程》","level":"1.2","depth":1,"path":"gdb/README.md","ref":"gdb/README.md","articles":[{"title":"安装gdb","level":"1.2.1","depth":2,"path":"gdb/001_intall_gdb.md","ref":"gdb/001_intall_gdb.md","articles":[]},{"title":"启动gdb","level":"1.2.2","depth":2,"path":"gdb/002_run_gdb.md","ref":"gdb/002_run_gdb.md","articles":[]},{"title":"配置.gdbinit","level":"1.2.3","depth":2,"path":"gdb/gdbinit.md","ref":"gdb/gdbinit.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","hide-element","chapter-fold","expandable-chapters","code","splitter","-lunr","-search","search-pro","insert-logo","custom-favicon","tbfed-pagefooter","-sharing","popup","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"livereload":{},"splitter":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./book.ico","back-to-top-button":{},"custom-favicon":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203061424792.png"},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"gdb/001_intall_gdb.md","mtime":"2022-03-05T09:59:59.158Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-06T09:09:12.146Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"安装gdb","level":"1.2.1","depth":2,"next":{"title":"启动gdb","level":"1.2.2","depth":2,"path":"gdb/002_run_gdb.md","ref":"gdb/002_run_gdb.md","articles":[]},"previous":{"title":"《GDB 教程》","level":"1.2","depth":1,"path":"gdb/README.md","ref":"gdb/README.md","articles":[{"title":"安装gdb","level":"1.2.1","depth":2,"path":"gdb/001_intall_gdb.md","ref":"gdb/001_intall_gdb.md","articles":[]},{"title":"启动gdb","level":"1.2.2","depth":2,"path":"gdb/002_run_gdb.md","ref":"gdb/002_run_gdb.md","articles":[]},{"title":"显示gdb信息","level":"1.2.3","depth":2,"path":"gdb/003_show_gdb_info.md","ref":"gdb/003_show_gdb_info.md","articles":[]},{"title":"显示可执行程序信息","level":"1.2.4","depth":2,"path":"gdb/004_show_exec_info.md","ref":"gdb/004_show_exec_info.md","articles":[]},{"title":"配置.gdbinit","level":"1.2.5","depth":2,"path":"gdb/gdbinit.md","ref":"gdb/gdbinit.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","hide-element","chapter-fold","expandable-chapters","code","splitter","-lunr","-search","search-pro","insert-logo","custom-favicon","tbfed-pagefooter","-sharing","page-treeview","popup","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"page-treeview":{"collapsed":false,"copyright":"","minHeaderCount":"2","minHeaderDeep":"2"},"chapter-fold":{},"livereload":{},"splitter":{},"search-pro":{},"popup":{},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./book.ico","back-to-top-button":{},"custom-favicon":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 30px; min-height: 30px","url":"https://cdn.jsdelivr.net/gh/HanxuLiu/CDN1/img/2021/202203061424792.png"},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"gdb/001_intall_gdb.md","mtime":"2022-03-21T09:21:06.517Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-21T15:26:55.853Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
