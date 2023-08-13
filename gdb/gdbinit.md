@@ -3,7 +3,7 @@
 
 gdb 启动时，会默认读取用户主目录和当前目录下的的配置文件，并执行里面的命令。这个文件通常为`.gdbinit`。
 
-### 1.  保存历史命令
+### 1.  保存历史命令`(set history save on)`
 gdb 默认不保存历史命令，但可以使用如下命令设置成保存历史命令：
 ```
 (gdb) set history save on
@@ -19,7 +19,7 @@ set history save on
 ```
 这样下次启动 gdb 时，就可以直接查找历史命令了。
 
-### 2.  退出时不显示提示信息
+### 2.  退出时不显示提示信息`(set confirm off)`
 gdb 在退出时会提示：
 ```
 A debugging session is active.
@@ -32,7 +32,7 @@ Quit anyway? (y or n)
 ```
 可以把这个命令写到用户主目录下`.gdbinit`文件中。
 
-### 3. 输出信息较多时不暂停打印
+### 3. 输出信息较多时不暂停打印`(set pagination off)`
 当 gdb 输出信息较多时，gdb 会暂停输出，并会打印“ ---Type <return> to continue, or q <return> to quit--- ”这样的提示信息，如下面所示：
 ```
 81 process 2639102 0xff04af84 in __lwp_park () from /usr/lib/libc.so.1
@@ -48,7 +48,7 @@ Quit anyway? (y or n)
 这样 gdb 就会全部输出，中间不会暂停。
 同样，可以把该命令写到用户主目录下`.gdbinit`文件中。
 
-### 4. 关闭 gdb 启动时提示信息
+### 4. 关闭 gdb 启动时提示信息`(alias gdb="gdb -q")`
 gdb 在启动时会显示如下一些提示信息：
 ```
 GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2

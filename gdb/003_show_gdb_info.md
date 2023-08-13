@@ -1,7 +1,7 @@
 
 ## 显示gdb信息
 
-### 1. 显示gdb版本、配置信息
+### 1. 显示gdb版本信息`(show version)`
 ```
 (gdb) show version
 GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
@@ -21,6 +21,10 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word".
 (gdb)
 ```
+
+### 2. 显示gdb配置信息`(show configuration)`
+使用命令`show configuration`，或者在shell窗口使用命令`gdb --configuration`避免gdb启动。
+
 ```
 (gdb) show configuration 
 This GDB was configured as follows:
@@ -46,7 +50,6 @@ This GDB was configured as follows:
 tree, and GDB will still find it.)
 (gdb)
 ```
-
 
 
 

@@ -35,8 +35,9 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-### 1. 显示源代码
+### 1. 显示源代码的几种方法
 使用`list`（简写为l）命令来显示源代码：
+####  1.1 显示源代码`(list)`
 ```
 (gdb) l
 3	void BubbleSort(int *arr, int size) {
@@ -51,7 +52,7 @@ int main(int argc, char* argv[]) {
 12	      }
 (gdb)
 ```
-`list`命令打印指定行号：
+####  1.2 显示指定行号`(list num)`
 ```
 (gdb) l 16
 11	        arr[j + 1] = tmp;
@@ -66,7 +67,7 @@ int main(int argc, char* argv[]) {
 20	  for (int i = 0; i < 5; i++)
 (gdb)
 ```
-`list`命令打印指定函数：
+####  1.3 显示指定函数`(list func)`
 ```
 (gdb) l main
 12	      }
@@ -81,7 +82,7 @@ int main(int argc, char* argv[]) {
 21	    printf("%5d", a[i]);
 (gdb)
 ```
-`list`命令指定向前或向后打印：
+####  1.4 指定向前或向后显示`(list +/-)`
 ```
 (gdb) l +
 22	  printf("\n");
@@ -105,7 +106,7 @@ int main(int argc, char* argv[]) {
 21	    printf("%5d", a[i]);
 (gdb)
 ```
-`list`命令打印指定范围：
+####  1.5 显示指定范围`(list x,y)`
 ```
 (gdb) l 9,11
 9	        tmp = arr[j];
@@ -115,6 +116,7 @@ int main(int argc, char* argv[]) {
 ```
 
 ### 2. 显示可执行程序中所有函数
+####  2.1 显示所有函数`(info functions)`
 使用`info functions`命令可以列出可执行文件的所有函数名称，gdb会列出可执行文件中的函数原型以及系统库中不带调试信息的函数：
 ```
 (gdb) info functions 
@@ -141,7 +143,8 @@ Non-debugging symbols:
 0x0000000000001418  _fini
 (gdb)
 ```
-还可以使用正则表达式`info functions regex`列出符合筛选要求的函数名称：
+####  2.2 显示筛选后的函数`(info functions regex)`
+可以使用正则表达式`info functions regex`列出符合筛选要求的函数名称：
 ```
 (gdb) info functions put*
 All functions matching regular expression "put*":
@@ -151,5 +154,4 @@ Non-debugging symbols:
 0x0000000000001090  puts@plt
 (gdb) 
 ```
-
 
